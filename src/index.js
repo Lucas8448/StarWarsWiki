@@ -11,6 +11,7 @@ import Planet from "./routes/pages/PlanetPage";
 import Species from "./routes/pages/SpeciesPage";
 import Starship from "./routes/pages/StarshipPage";
 import Vehicle from "./routes/pages/VehiclePage";
+import Film from "./routes/pages/FilmPage";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/vehicle/:id",
     element: <Vehicle />,
+  },
+  {
+    path: "/film/:id",
+    element: <Film />,
   },
 ]);
 

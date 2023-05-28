@@ -7,6 +7,7 @@ function Home() {
   const [species, setSpecies] = useState([]);
   const [starships, setStarships] = useState([]);
   const [vehicles, setVehicles] = useState([]);
+  const [films, setFilms] = useState([]);
 
   useEffect(() => {
     fetch('https://swapi.dev/api/people/')
@@ -29,6 +30,10 @@ function Home() {
     fetch('https://swapi.dev/api/vehicles/')
       .then(response => response.json())
       .then(data => setVehicles(data.results.map((vehicle, index) => ({ ...vehicle, id: index + 1 }))));
+
+    fetch('https://swapi.dev/api/films/')
+  .then(response => response.json())
+  .then(data =>setFilms(data.results.map((film, index) => ({...film, id: index + 1, name: film.title}))));
   }, []);
 
   return (
@@ -62,6 +67,12 @@ function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {vehicles.map((vehicle) => (
             <Item key={vehicle.id} item={vehicle} type={{ id: "vehicle", name:"Vehicle" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
+          ))}
+        </div>
+        <h1 className="text-2xl font-bold mb-4 text-center title">Films</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {films.map((film) => (
+            <Item key={film.id} item={film} type={{ id: "film", name:"Film" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
           ))}
         </div>
       </div>
