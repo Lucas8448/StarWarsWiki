@@ -7,6 +7,10 @@
   src: url('./assets/Starjedi.ttf') format('truetype');
 }
 
+body {
+  background-color: #000;
+}
+
 .title {
   font-family: 'Star Jedi', sans-serif;
   background-color: #000;

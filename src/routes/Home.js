@@ -33,7 +33,7 @@ function Home() {
 
     fetch('https://swapi.dev/api/films/')
   .then(response => response.json())
-  .then(data =>setFilms(data.results.map((film, index) => ({...film, id: index + 1, name: film.title}))));
+  .then(data =>setFilms(data.results.map((film, index) => ({...film, id: index + 1 }))));
   }, []);
 
   return (
