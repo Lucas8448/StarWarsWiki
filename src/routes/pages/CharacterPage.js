@@ -15,7 +15,7 @@ function Character() {
   const getIdFromUrl = (url) => url.match(/(\d+)\/$/)[1];
 
   useEffect(() => {
-    fetch(`https://swapi.dev/api/people/${id}`)
+    fetch(`/data/people/${id}.json`)
       .then(response => response.json())
       .then(data => {
         setCharacter(data);

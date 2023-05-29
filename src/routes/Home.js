@@ -8,85 +8,100 @@ function Home() {
   const [starships, setStarships] = useState([]);
   const [vehicles, setVehicles] = useState([]);
   const [films, setFilms] = useState([]);
+  const [expandedSections, setExpandedSections] = useState([]);
 
   useEffect(() => {
     Promise.all([
-      fetch('https://swapi.dev/api/people/?page=1'),
-      fetch('https://swapi.dev/api/people/?page=2'),
-      fetch('https://swapi.dev/api/people/?page=3')
+      fetch('/data/people.json'),
     ]).then((responses) => 
       Promise.all(responses.map((response) => response.json()))
     ).then((data) => {
       let characters = [];
       data.forEach((pageData, pageIndex) => {
-        const pageCharacters = pageData.results.map((character, index) => ({ ...character, id: pageIndex * 10 + index + 1 }));
+        const pageCharacters = pageData.map((character, index) => ({ ...character, id: pageIndex * 10 + index + 1 }));
         characters = characters.concat(pageCharacters);
       });
       setCharacters(characters);
     });
 
-    fetch('https://swapi.dev/api/planets/')
+    fetch('/data/planets.json')
       .then(response => response.json())
-      .then(data => setPlanets(data.results.map((planet, index) => ({ ...planet, id: index + 1 }))));
+      .then(data => setPlanets(data.map((planet, index) => ({ ...planet, id: index + 1 }))));
 
 
-    fetch('https://swapi.dev/api/species/')
+    fetch('/data/species.json')
       .then(response => response.json())
-      .then(data => setSpecies(data.results.map((specie, index) => ({ ...specie, id: index + 1 }))));
+      .then(data => setSpecies(data.map((specie, index) => ({ ...specie, id: index + 1 }))));
 
-    fetch('https://swapi.dev/api/starships/')
+    fetch('/data/starships.json')
       .then(response => response.json())
-      .then(data => setStarships(data.results.map((starship, index) => ({ ...starship, id: index + 1 }))));
+      .then(data => setStarships(data.map((starship, index) => ({ ...starship, id: index + 1 }))));
 
-    fetch('https://swapi.dev/api/vehicles/')
+    fetch('/data/vehicles.json')
       .then(response => response.json())
-      .then(data => setVehicles(data.results.map((vehicle, index) => ({ ...vehicle, id: index + 1 }))));
+      .then(data => setVehicles(data.map((vehicle, index) => ({ ...vehicle, id: index + 1 }))));
 
-    fetch('https://swapi.dev/api/films/')
-  .then(response => response.json())
-  .then(data =>setFilms(data.results.map((film, index) => ({...film, id: index + 1 }))));
+    fetch('/data/films.json')
+      .then(response => response.json())
+      .then(data =>setFilms(data.map((film, index) => ({...film, id: index + 1 }))));
   }, []);
+  
+  const handleExpandToggle = (section) => {
+    setExpandedSections(prevState => {
+      if (prevState.includes(section)) {
+        return prevState.filter(item => item !== section);
+      } else {
+        return [...prevState, section];
+      }
+    });
+  };
+
+  const renderItems = (items, section) => {
+    const isExpanded = expandedSections.includes(section);
+    const visibleItems = isExpanded ? items : items.slice(0, 10);
+
+    return (
+      <>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {visibleItems.map((item) => (
+            <Item
+              key={item.id}
+              item={item}
+              type={{ id: section, name: section.charAt(0).toUpperCase() + section.slice(1) }}
+              className="bg-gray-900 rounded-lg shadow-md p-4"
+            />
+          ))}
+        </div>
+        {items.length > 10 && (
+          <button onClick={() => handleExpandToggle(section)}>
+            {isExpanded ? "Show Less" : "Show More"}
+          </button>
+        )}
+      </>
+    );
+  };
 
   return (
     <div className="p-4 min-h-screen flex flex-col justify-center items-center bg-black text-yellow-500">
       <h1 className="text-6xl font-bold mb-6 text-center text-yellow-500 title">The Star Wars Wiki</h1>
       <div className="max-w-screen-xl w-full">
         <h1 className="text-2xl font-bold mb-4 text-center title">Characters</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {characters.map((character) => (
-            <Item key={character.id} item={character} type={{ id: "character", name:"Character" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
-          ))}
-        </div>
+        {renderItems(characters, "character")}
+
         <h1 className="text-2xl font-bold mb-4 text-center title">Planets</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {planets.map((planet) => (
-            <Item key={planet.id} item={planet} type={{ id: "planet", name:"Planet" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
-          ))}
-        </div>
+        {renderItems(planets, "planet")}
+
         <h1 className="text-2xl font-bold mb-4 text-center title">Species</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {species.map((specie) => (
-            <Item key={specie.id} item={specie} type={{ id: "species", name:"Species" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
-          ))}
-        </div>
+        {renderItems(species, "species")}
+
         <h1 className="text-2xl font-bold mb-4 text-center title">Starships</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {starships.map((starship) => (
-            <Item key={starship.id} item={starship} type={{ id: "starship", name:"Starship" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
-          ))}
-        </div>
+        {renderItems(starships, "starship")}
+
         <h1 className="text-2xl font-bold mb-4 text-center title">&#x60;ehicles</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {vehicles.map((vehicle) => (
-            <Item key={vehicle.id} item={vehicle} type={{ id: "vehicle", name:"Vehicle" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
-          ))}
-        </div>
+        {renderItems(vehicles, "vehicle")}
+
         <h1 className="text-2xl font-bold mb-4 text-center title">Films</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {films.map((film) => (
-            <Item key={film.id} item={film} type={{ id: "film", name:"Film" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
-          ))}
-        </div>
+        {renderItems(films, "film")}
       </div>
     </div>
   );

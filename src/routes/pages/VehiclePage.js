@@ -11,7 +11,7 @@ function Vehicle() {
   const getIdFromUrl = (url) => url.match(/(\d+)\/$/)[1];
 
   useEffect(() => {
-    fetch(`https://swapi.dev/api/vehicles/${id}`)
+    fetch(`/data/vehicles/${id}.json`)
       .then(response => response.json())
       .then(data => {
         setVehicle(data);

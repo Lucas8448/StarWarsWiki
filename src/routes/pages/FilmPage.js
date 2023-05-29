@@ -10,7 +10,7 @@ function Film() {
   const getIdFromUrl = (url) => url.match(/(\d+)\/$/)[1];
 
   useEffect(() => {
-    fetch(`https://swapi.dev/api/films/${id}`)
+    fetch(`/data/films/${id}.json`)
       .then(response => response.json())
       .then(data => {
         setFilm(data);

@@ -9,24 +9,45 @@ function Species() {
   const [homeworld, setHomeworld] = useState(null);
   const { id } = useParams();
 
-  const getIdFromUrl = (url) => url.match(/(\d+)\/$/)[1];
+  const getIdFromUrl = (url) => url.split('/').filter(Boolean).pop();
 
   useEffect(() => {
-    fetch(`https://swapi.dev/api/species/${id}`)
+    fetch(`/data/species/${id}.json`)
       .then(response => response.json())
       .then(data => {
         setSpecies(data);
 
         // Fetch related resources
-        fetch(data.homeworld).then(res => res.json())
-            .then(planet => ({ ...planet, id: getIdFromUrl(planet.url) }))
-            .then(setHomeworld);
-        Promise.all(data.people.map(url => fetch(url).then(res => res.json())
-            .then(person => ({ ...person, id: getIdFromUrl(person.url) }))))
-          .then(setPeople);
-        Promise.all(data.films.map(url => fetch(url).then(res => res.json())
-            .then(film => ({ ...film, id: getIdFromUrl(film.url) }))))
-          .then(setFilms);
+        if (data.homeworld) {
+          fetch(data.homeworld)
+            .then(res => res.json())
+            .then(planet => {
+              const planetId = getIdFromUrl(planet.url);
+              setHomeworld({ ...planet, id: planetId });
+            });
+        }
+
+        Promise.all(
+          data.people.map(url =>
+            fetch(url)
+              .then(res => res.json())
+              .then(person => {
+                const personId = getIdFromUrl(person.url);
+                return { ...person, id: personId };
+              })
+          )
+        ).then(setPeople);
+
+        Promise.all(
+          data.films.map(url =>
+            fetch(url)
+              .then(res => res.json())
+              .then(film => {
+                const filmId = getIdFromUrl(film.url);
+                return { ...film, id: filmId };
+              })
+          )
+        ).then(setFilms);
       });
   }, [id]);
 
@@ -43,18 +64,36 @@ function Species() {
         </>
       )}
 
-      <h2 className="text-xl font-bold mb-2">People</h2>
+      <h2 className="text-xl font-bold mb-2">Characters</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {people.length > 0 ? people.map((person) => (
-            <Item key={person.id} item={person} type={{ id: "person", name:"Person" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
-        )) : <p>No People Available</p>}
+        {people.length > 0 ? (
+          people.map(person => (
+            <Item
+              key={person.id}
+              item={person}
+              type={{ id: "person", name:"Character" }}
+              className="bg-gray-900 rounded-lg shadow-md p-4"
+            />
+          ))
+        ) : (
+          <p>No characters Available</p>
+        )}
       </div>
 
       <h2 className="text-xl font-bold mb-2">Films</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {films.length > 0 ? films.map((film) => (
-            <Item key={film.id} item={film} type={{ id: "film", name:"Film" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
-        )) : <p>No Films Available</p>}
+        {films.length > 0 ? (
+          films.map(film => (
+            <Item
+              key={film.id}
+              item={film}
+              type={{ id: "film", name:"Film" }}
+              className="bg-gray-900 rounded-lg shadow-md p-4"
+            />
+          ))
+        ) : (
+          <p>No Films Available</p>
+        )}
       </div>
     </div>
   );

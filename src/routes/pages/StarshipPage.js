@@ -10,7 +10,7 @@ function Starship() {
   const getIdFromUrl = (url) => url.match(/(\d+)\/$/)[1];
 
   useEffect(() => {
-    fetch(`https://swapi.dev/api/starships/${id}`)
+    fetch(`/data/starships/${id}.json`)
       .then(response => response.json())
       .then(data => {
         setStarship(data);

@@ -11,7 +11,7 @@ function Planet() {
   const getIdFromUrl = (url) => url.match(/(\d+)\/$/)[1];
 
   useEffect(() => {
-    fetch(`https://swapi.dev/api/planets/${id}`)
+    fetch(`/data/planets/${id}.json`)
       .then(response => response.json())
       .then(data => {
         setPlanet(data);
