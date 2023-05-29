@@ -4,6 +4,12 @@ This project is a comprehensive Star Wars Wiki using the Star Wars API (SWAPI). 
 
 The Star Wars Wiki focuses on the original trilogy and the prequels, showcasing characters, planets, species, starships, vehicles, and films from these eras.
 
+## Url
+
+The website is currently hosted on azure at this url:
+
+<https://zealous-grass-04ac38410.3.azurestaticapps.net/>
+
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
