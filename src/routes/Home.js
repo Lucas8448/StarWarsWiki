@@ -10,9 +10,20 @@ function Home() {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
-    fetch('https://swapi.dev/api/people/')
-      .then(response => response.json())
-      .then(data => setCharacters(data.results.map((character, index) => ({ ...character, id: index + 1 }))));
+    Promise.all([
+      fetch('https://swapi.dev/api/people/?page=1'),
+      fetch('https://swapi.dev/api/people/?page=2'),
+      fetch('https://swapi.dev/api/people/?page=3')
+    ]).then((responses) => 
+      Promise.all(responses.map((response) => response.json()))
+    ).then((data) => {
+      let characters = [];
+      data.forEach((pageData, pageIndex) => {
+        const pageCharacters = pageData.results.map((character, index) => ({ ...character, id: pageIndex * 10 + index + 1 }));
+        characters = characters.concat(pageCharacters);
+      });
+      setCharacters(characters);
+    });
 
     fetch('https://swapi.dev/api/planets/')
       .then(response => response.json())
@@ -38,6 +49,7 @@ function Home() {
 
   return (
     <div className="p-4 min-h-screen flex flex-col justify-center items-center bg-black text-yellow-500">
+      <h1 className="text-6xl font-bold mb-6 text-center text-yellow-500 title">The Star Wars Wiki</h1>
       <div className="max-w-screen-xl w-full">
         <h1 className="text-2xl font-bold mb-4 text-center title">Characters</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

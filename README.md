@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# The Star Wars Wiki
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a comprehensive Star Wars Wiki using the Star Wars API (SWAPI). It is a React application that displays information about various elements from the Star Wars universe.
 
-## Available Scripts
+The Star Wars Wiki focuses on the original trilogy and the prequels, showcasing characters, planets, species, starships, vehicles, and films from these eras.
 
-In the project directory, you can run:
+## Prerequisites
 
-### `npm start`
+Before you begin, ensure you have met the following requirements:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- You have installed the latest version of [Node.js and npm](https://nodejs.org/en/download/).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- You have a Windows/Linux/Mac machine.
 
-### `npm test`
+## Installing The Star Wars Wiki
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To install The Star Wars Wiki, follow these steps:
 
-### `npm run build`
+1. Clone the repository:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```shell
+   git clone https://github.com/Lucas8448/StarWarsWiki.git```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install the project dependencies:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```shell
+   npm install```
 
-### `npm run eject`
+3. Start the development server:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ```shell
+   npm start```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Using The Star Wars Wiki
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To use The Star Wars Wiki, follow these steps:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Open your browser and navigate to `http://localhost:3000/`.
 
-## Learn More
+2. Click on any of the elements on the home page to view more information about them.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contributing to The Star Wars Wiki
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To contribute to The Star Wars Wiki, follow these steps:
 
-### Code Splitting
+1. Fork this repository.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Create a branch: `git checkout -b <branch_name>`.
 
-### Analyzing the Bundle Size
+3. Make your changes and commit them: `git commit -m '<commit_message>'`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. Push to the original branch: `git push origin <project_name>/<location>`
 
-### Making a Progressive Web App
+5. Create the pull request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Alternatively, see the GitHub documentation on [creating a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
