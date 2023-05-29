@@ -59,4 +59,6 @@ To contribute to The Star Wars Wiki, follow these steps:
 
 5. Create the pull request.
 
-Alternatively, see the GitHub documentation on [creating a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+## Credits
+
+- [Star Wars API](https://swapi.dev/) All the data within this app is collected via their API
