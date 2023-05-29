@@ -71,7 +71,7 @@ function Species() {
             <Item
               key={person.id}
               item={person}
-              type={{ id: "person", name:"Character" }}
+              type={{ id: "character", name:"Character" }}
               className="bg-gray-900 rounded-lg shadow-md p-4"
             />
           ))
