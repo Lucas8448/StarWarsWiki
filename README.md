@@ -25,17 +25,17 @@ To install The Star Wars Wiki, follow these steps:
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/Lucas8448/StarWarsWiki.git```
+   git clone https://github.com/Lucas8448/StarWarsWiki.git
 
 2. Install the project dependencies:
 
    ```shell
-   npm install```
+   npm install
 
 3. Start the development server:
 
    ```shell
-   npm start```
+   npm start
 
 ## Using The Star Wars Wiki
 
