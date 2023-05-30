@@ -94,7 +94,7 @@ function Home() {
       <h1 className="text-6xl font-bold mb-6 text-center text-yellow-500 title">The Star Wars Wiki</h1>
       <div className="max-w-screen-xl w-full">
         <h1 className="text-2xl font-bold mb-4 text-center title">Characters</h1>
-        {renderItems(characters, "characters")}
+        {renderItems(characters, "character")}
 
         <h1 className="text-2xl font-bold mb-4 text-center title">Planets</h1>
         {renderItems(planets, "planets")}

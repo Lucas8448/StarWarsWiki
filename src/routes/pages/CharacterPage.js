@@ -20,7 +20,6 @@ function Character() {
       .then(data => {
         setCharacter(data);
 
-        // Fetch related resources
         Promise.all(data.films.map(url => fetch(url).then(res => res.json())
             .then(film => ({ ...film, id: getIdFromUrl(film.url) }))))
           .then(setFilms);
@@ -39,50 +38,62 @@ function Character() {
       });
   }, [id]);
 
-  if (!character) return <div>Loading...</div>;
+  if (!character) return <div className="flex justify-center items-center h-screen text-yellow-500 text-2xl">Loading...</div>;
 
   return (
-    <div className="p-4 bg-black text-yellow-500">
-      <h1 className="text-2xl font-bold mb-4">{character.name}</h1>
-      <p className="text-lg">Born: {character.birth_year}</p>
-      <p className="text-lg">Hair Colour: {character.hair_color}</p>
-      <p className="text-lg">Height: {character.height}cm</p>
-      <p className="text-lg">Weight: {character.mass} Kg</p>
-      <p className="text-lg">Skin Colour: {character.skin_color}</p>
-    
-      <h2 className="text-xl font-bold mb-2">Films</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {films.length > 0 ? films.map((film) => (
-            <Item key={film.id} item={film} type={{ id: "film", name:"Film" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
-        )) : <p>No Films Available</p>}
+    <div className="p-4 min-h-screen bg-black text-yellow-500">
+      <h1 className="text-6xl font-bold mb-4 text-center">{character.name}</h1>
+      <div className="mb-8 text-lg flex flex-col items-center">
+        <p>Born: {character.birth_year}</p>
+        <p>Hair Colour: {character.hair_color}</p>
+        <p>Height: {character.height}cm</p>
+        <p>Weight: {character.mass} Kg</p>
+        <p>Skin Colour: {character.skin_color}</p>
       </div>
-      
-      <h2 className="text-xl font-bold mb-2">Planets</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {planets.length > 0 ? planets.map((planet) => (
-            <Item key={planet.id} item={planet} type={{ id: "planet", name:"Planet" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
-        )) : <p>No Planets Available</p>}
+  
+      <div>
+        <h2 className="text-3xl font-bold mb-2 text-center">Films</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {films.length > 0 ? films.map((film) => (
+              <Item key={film.id} item={film} type={{ id: "film", name:"Film" }} className="bg-gray-900 rounded-lg shadow-md p-4 transform transition-transform duration-500 ease-in-out hover:scale-105" />
+          )) : <p className="text-center text-xl">No Films Available</p>}
+        </div>
       </div>
-      
-      <h2 className="text-xl font-bold mb-2">Species</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {species.length > 0 ? species.map((specie) => (
-            <Item key={specie.id} item={specie} type={{ id: "species", name:"Species" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
-        )) : <p>No Species Available</p>}
+
+      <div>
+        <h2 className="text-3xl font-bold mb-2 text-center">Planets</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {planets.length > 0 ? planets.map((planet) => (
+              <Item key={planet.id} item={planet} type={{ id: "planet", name:"Planet" }} className="bg-gray-900 rounded-lg shadow-md p-4 transform transition-transform duration-500 ease-in-out hover:scale-105" />
+          )) : <p className="text-center text-xl">No Planets Available</p>}
+        </div>
       </div>
-      
-      <h2 className="text-xl font-bold mb-2">Starships</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {starships.length > 0 ? starships.map((starship) => (
-            <Item key={starship.id} item={starship} type={{ id: "starship", name:"Starship" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
-        )) : <p>No Starships Available</p>}
+
+      <div>
+        <h2 className="text-3xl font-bold mb-2 text-center">Species</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {species.length > 0 ? species.map((specie) => (
+              <Item key={specie.id} item={specie} type={{ id: "species", name:"Species" }} className="bg-gray-900 rounded-lg shadow-md p-4 transform transition-transform duration-500 ease-in-out hover:scale-105" />
+          )) : <p className="text-center text-xl">No Species Available</p>}
+        </div>
       </div>
-      
-      <h2 className="text-xl font-bold mb-2">Vehicles</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {vehicles.length > 0 ? vehicles.map((vehicle) => (
-            <Item key={vehicle.id} item={vehicle} type={{ id: "vehicle", name:"Vehicle" }} className="bg-gray-900 rounded-lg shadow-md p-4" />
-        )) : <p>No Vehicles Available</p>}
+
+      <div>
+        <h2 className="text-3xl font-bold mb-2 text-center">Starships</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {starships.length > 0 ? starships.map((starship) => (
+              <Item key={starship.id} item={starship} type={{ id: "starship", name:"Starship" }} className="bg-gray-900 rounded-lg shadow-md p-4 transform transition-transform duration-500 ease-in-out hover:scale-105" />
+          )) : <p className="text-center text-xl">No Starships Available</p>}
+        </div>
+      </div>
+
+      <div>
+        <h2 className="text-3xl font-bold mb-2 text-center">Vehicles</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {vehicles.length > 0 ? vehicles.map((vehicle) => (
+              <Item key={vehicle.id} item={vehicle} type={{ id: "vehicle", name:"Vehicle" }} className="bg-gray-900 rounded-lg shadow-md p-4 transform transition-transform duration-500 ease-in-out hover:scale-105" />
+          )) : <p className="text-center text-xl">No Vehicles Available</p>}
+        </div>
       </div>
     </div>
   );
