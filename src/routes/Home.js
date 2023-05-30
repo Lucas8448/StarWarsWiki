@@ -12,17 +12,23 @@ function Home() {
 
   useEffect(() => {
     Promise.all([
-      fetch('/data/people.json'),
-    ]).then((responses) => 
+    fetch('/data/people.json'),
+  ]).then((responses) =>
       Promise.all(responses.map((response) => response.json()))
-    ).then((data) => {
+  ).then((data) => {
       let characters = [];
       data.forEach((pageData, pageIndex) => {
-        const pageCharacters = pageData.map((character, index) => ({ ...character, id: pageIndex * 10 + index + 1 }));
-        characters = characters.concat(pageCharacters);
+          const pageCharacters = pageData.map((character) => {
+              const url = new URL(character.url);
+              const pathSegments = url.pathname.split('/');
+              const id = pathSegments[pathSegments.length - 2]; // the id is the second last segment of the path
+              return { ...character, id };
+          });
+          characters = characters.concat(pageCharacters);
       });
       setCharacters(characters);
     });
+
 
     fetch('/data/planets.json')
       .then(response => response.json())
