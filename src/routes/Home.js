@@ -74,12 +74,14 @@ function Home() {
               key={item.id}
               item={item}
               type={{ id: section, name: section.charAt(0).toUpperCase() + section.slice(1) }}
-              className="bg-gray-900 rounded-lg shadow-md p-4"
+              className="bg-gray-900 rounded-lg shadow-md p-4 transform transition-transform duration-500 ease-in-out hover:scale-105"
             />
           ))}
         </div>
         {items.length > 10 && (
-          <button onClick={() => handleExpandToggle(section)}>
+          <button
+            className="mt-3 px-4 py-2 rounded font-bold bg-yellow-500 text-black hover:bg-yellow-600 transition-colors duration-300 ease-in-out"
+            onClick={() => handleExpandToggle(section)}>
             {isExpanded ? "Show Less" : "Show More"}
           </button>
         )}
@@ -92,22 +94,22 @@ function Home() {
       <h1 className="text-6xl font-bold mb-6 text-center text-yellow-500 title">The Star Wars Wiki</h1>
       <div className="max-w-screen-xl w-full">
         <h1 className="text-2xl font-bold mb-4 text-center title">Characters</h1>
-        {renderItems(characters, "character")}
+        {renderItems(characters, "characters")}
 
         <h1 className="text-2xl font-bold mb-4 text-center title">Planets</h1>
-        {renderItems(planets, "planet")}
+        {renderItems(planets, "planets")}
 
         <h1 className="text-2xl font-bold mb-4 text-center title">Species</h1>
         {renderItems(species, "species")}
 
         <h1 className="text-2xl font-bold mb-4 text-center title">Starships</h1>
-        {renderItems(starships, "starship")}
+        {renderItems(starships, "starships")}
 
         <h1 className="text-2xl font-bold mb-4 text-center title">&#x60;ehicles</h1>
-        {renderItems(vehicles, "vehicle")}
+        {renderItems(vehicles, "vehicles")}
 
         <h1 className="text-2xl font-bold mb-4 text-center title">Films</h1>
-        {renderItems(films, "film")}
+        {renderItems(films, "films")}
       </div>
     </div>
   );
